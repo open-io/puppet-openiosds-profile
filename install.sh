@@ -48,7 +48,7 @@ if [ $EUID -ne 0 ]; then
 fi
 
 
-### postinstall
+### preinstall
 [ -f ${PROFILE_PATH}/${PROFILE}/preinstall.sh ] && \
   . ${PROFILE_PATH}/${PROFILE}/preinstall.sh
 
@@ -58,10 +58,6 @@ echo "########## Starting deployment ..."
 
 # Fix Hiera warning
 $TOUCH -a /etc/puppet/hiera.yaml
-
-### postinstall
-[ -f ${PROFILE_PATH}/${PROFILE}/preinstall.sh ] && \
-  . ${PROFILE_PATH}/${PROFILE}/preinstall.sh
 
 # Deploy services
 for manifest in $($LS ${PROFILE_PATH}/${PROFILE}/manifests/*.pp)
