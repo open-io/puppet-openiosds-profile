@@ -23,7 +23,7 @@ PROFILE_PATH="/usr/share/puppet/modules/openiosds/profiles"
 
 ### Preflight checks
 # Profile checks
-if [ $# -ne 1 ]; then
+if [ $# -lt 1 ]; then
   echo "Usage: $0 <profile>"
   exit 1
 fi
