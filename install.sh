@@ -4,7 +4,9 @@
 ### Vars
 OIOCLUSTER="/usr/bin/oio-cluster"
 OIOMETA0INIT="/usr/bin/oio-meta0-init"
+GRIDINITD="/usr/bin/gridinit"
 GRIDINITCMD="/usr/bin/gridinit_cmd"
+GRIDINIT_SOCKET="/run/gridinit/gridinit.sock"
 PUPPET="/usr/bin/puppet"
 TOUCH="/bin/touch"
 CAT="/usr/bin/cat"
@@ -18,7 +20,6 @@ TIMEOUT=20
 WAIT=2
 NBREPLICAS=3
 IGNOREDISTANCE="on"
-GRIDINIT_SOCKET="/run/gridinit/gridinit.sock"
 PROFILE="standalone"
 PROFILE_PATH="/usr/share/puppet/modules/openiosds/profiles"
 
