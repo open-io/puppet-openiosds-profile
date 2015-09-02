@@ -5,6 +5,7 @@
 OIOCLUSTER="/usr/bin/oio-cluster"
 OIOMETA0INIT="/usr/bin/oio-meta0-init"
 GRIDINITD="/usr/bin/gridinit"
+GRIDINITD_CONF="/etc/gridinit.conf"
 GRIDINITCMD="/usr/bin/gridinit_cmd"
 GRIDINIT_SOCKET="/run/gridinit/gridinit.sock"
 PUPPET="/usr/bin/puppet"
