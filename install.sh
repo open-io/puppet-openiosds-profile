@@ -23,6 +23,8 @@ NBREPLICAS=3
 IGNOREDISTANCE="on"
 PROFILE="standalone"
 PROFILE_PATH="/usr/share/puppet/modules/openiosds/profiles"
+SETENFORCE="/sbin/setenforce"
+MODULEPATH="/usr/share/puppet/modules"
 
 
 ### Preflight checks
@@ -36,6 +38,10 @@ if [ ! -d ${PROFILE_PATH}/$1 ]; then
   exit 1
 fi
 PROFILE=$1
+
+# Disable SELinux
+$SETENFORCE 0
+$SED -i -e 's@enforcing@permissive@' /etc/selinux/config
 
 # Check if using root or sudo rights
 if [ $EUID -ne 0 ]; then
@@ -66,8 +72,8 @@ $TOUCH -a /etc/puppet/hiera.yaml
 for manifest in $($LS ${PROFILE_PATH}/${PROFILE}/manifests/*.pp)
 do
   echo "Deploying service $($BASENAME $manifest .pp) ..."
-  $PUPPET apply $manifest || \
-    echo "Error: Failed to deploy service $($BASENAME $manifest .pp)."
+  $PUPPET apply --modulepath=$MODULEPATH $manifest || \
+    (echo "Error: Failed to deploy service $($BASENAME $manifest .pp)." ; exit 1)
 done
 
 # postdeploy
