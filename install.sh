@@ -25,6 +25,7 @@ PROFILE="standalone"
 PROFILE_PATH="/usr/share/puppet/modules/openiosds/profiles"
 SETENFORCE="/sbin/setenforce"
 MODULEPATH="/usr/share/puppet/modules"
+PUPPETOPTS=""
 
 
 ### Preflight checks
@@ -33,7 +34,7 @@ if [ $# -lt 1 ]; then
   echo "Usage: $0 <profile>"
   exit 1
 fi
-if [ ! -d ${PROFILE_PATH}/$1 ]; then
+if [ ! -d "${PROFILE_PATH}/$1" ]; then
   echo "Profile $1 does not exists."
   exit 1
 fi
@@ -72,7 +73,12 @@ $TOUCH -a /etc/puppet/hiera.yaml
 for manifest in $($LS ${PROFILE_PATH}/${PROFILE}/manifests/*.pp)
 do
   echo "Deploying service $($BASENAME $manifest .pp) ..."
-  $PUPPET apply --modulepath=$MODULEPATH $manifest || \
+  PUPPET_VERSION=$($PUPPET --version)
+  res=$(echo -e "4\n$PUPPET_VERSION" | sort -V | head -n 1)
+  if [ "$res" != '4' ]; then
+    PUPPETOPTS="$PUPPETOPTS --no-stringify_facts"
+  fi
+  $PUPPET apply $PUPPETOPTS --modulepath=$MODULEPATH $manifest || \
     (echo "Error: Failed to deploy service $($BASENAME $manifest .pp)." ; exit 1)
 done
 
