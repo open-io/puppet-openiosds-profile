@@ -18,6 +18,7 @@ fi
 
 # Initialize meta0
 echo "Loading meta0 ..."
+sleep $WAIT
 $OIOMETA0INIT $NS || \
   (echo "Error: $OIOMETA0INIT failed. Aborting." ; exit 1)
 
