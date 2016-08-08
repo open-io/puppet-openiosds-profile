@@ -18,6 +18,7 @@ fi
 
 # Initialize meta0
 echo "Loading meta0 ..."
+sleep $WAIT
 $OIOMETA0INIT $NS || \
   (echo "Error: $OIOMETA0INIT failed. Aborting." ; exit 1)
 
@@ -28,5 +29,7 @@ $GRIDINITCMD -S $GRIDINIT_SOCKET restart @meta1
 $GRIDINITCMD -S $GRIDINIT_SOCKET restart @meta2
 
 # Waiting for service to restart ...
-sleep 5
+sleep 10
 
+# Unlocking scores
+$OIOCLUSTER -r $NS | xargs -n1 $OIOCLUSTER --unlock-score -S

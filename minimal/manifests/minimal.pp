@@ -1,43 +1,46 @@
-openiosds::sdsagent {'sds-agent-0':
-}
+class {'openiosds':}
 openiosds::namespace {'OPENIO':
   ns             => 'OPENIO',
   conscience_url => "${ipaddress}:6000",
   oioproxy_url   => "${ipaddress}:6006",
-  eventagent_url => "tcp://${ipaddress}:6008",
+  eventagent_url => "beanstalk://${ipaddress}:6014",
 }
-openiosds::conscience {'conscience-1':
-  num            => '1',
-  ns             => 'OPENIO',
-}
-openiosds::meta0 {'meta0-1':
-  num => '1',
+openiosds::account {'account-0':
   ns => 'OPENIO',
 }
-openiosds::meta1 {'meta1-1':
-  num => '1',
+openiosds::conscience {'conscience-0':
   ns => 'OPENIO',
 }
-openiosds::meta2 {'meta2-1':
-  num => '1',
+openiosds::meta0 {'meta0-0':
   ns => 'OPENIO',
 }
-openiosds::rawx {'rawx-1':
-  num => '1',
+openiosds::meta1 {'meta1-0':
   ns => 'OPENIO',
 }
-openiosds::account {'account-1':
-  num        => '1',
-  ns         => 'OPENIO',
-  redis_default_install => true,
-  redis_host => '127.0.0.1',
-  redis_port => '6379',
+openiosds::meta2 {'meta2-0':
+  ns => 'OPENIO',
 }
-openiosds::oioeventagent {'oio-event-agent-1':
-  num       => '1',
-  ns        => 'OPENIO',
+openiosds::rawx {'rawx-0':
+  ns => 'OPENIO',
 }
-openiosds::oioproxy {'oioproxy-1':
-  num       => '1',
-  ns        => 'OPENIO',
+openiosds::rdir {'rdir-0':
+  ns => 'OPENIO',
+}
+openiosds::oioblobindexer {'oio-blob-indexer-rawx-0':
+  ns => 'OPENIO',
+}
+openiosds::oioeventagent {'oio-event-agent-0':
+  ns => 'OPENIO',
+}
+openiosds::oioproxy {'oioproxy-0':
+  ns => 'OPENIO',
+}
+openiosds::redis {'redis-0':
+  ns => 'OPENIO',
+}
+openiosds::conscienceagent {'conscienceagent-0':
+  ns => 'OPENIO',
+}
+openiosds::beanstalkd {'beanstalkd-0':
+  ns => 'OPENIO',
 }
