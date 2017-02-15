@@ -2,6 +2,7 @@
 #set -x
 
 ### Vars
+OPENIOCMD="/usr/bin/openio"
 OIOCLUSTER="/usr/bin/oio-cluster"
 OIOMETA0INIT="/usr/bin/oio-meta0-init"
 GRIDINITD="/usr/bin/gridinit"
