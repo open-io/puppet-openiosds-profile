@@ -47,6 +47,7 @@ openiosds::rawx {'rawx-0':
 openiosds::rdir {'rdir-0':
   ns        => 'OPENIO',
   ipaddress => "${ipaddr}",
+  location  => "${hostname}-other",
   no_exec   => true,
 }
 openiosds::oioblobindexer {'oio-blob-indexer-rawx-0':
