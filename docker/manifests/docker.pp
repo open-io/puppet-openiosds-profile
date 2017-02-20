@@ -1,5 +1,6 @@
 # Default ipaddress to use
 $ipaddr = '127.0.0.1'
+$default_tempauth_users = 'demo:demo:DEMO_PASS:.admin'
 
 # Deploy a single node
 class {'gridinit':
@@ -82,4 +83,16 @@ openiosds::ecd {'ecd-0':
   ns        => 'OPENIO',
   ipaddress => "${ipaddr}",
   no_exec   => true,
+}
+openiosds::oioswift {'oioswift-0':
+  ns               => 'OPENIO',
+  ipaddress        => '0.0.0.0',
+  auth_system      => 'tempauth',
+  tempauth_users   => [$default_tempauth_users],
+  memcache_servers => "${ipaddress}:6019",
+  no_exec          => true,
+}
+openiosds::memcached {'memcached-0':
+  ns => 'OPENIO',
+  no_exec => true,
 }
