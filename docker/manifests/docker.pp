@@ -1,5 +1,6 @@
 # Default ipaddress to use
 $ipaddr = '127.0.0.1'
+# Comma separated list of tenant:user:passwd:privileges
 $default_tempauth_users = 'demo:demo:DEMO_PASS:.admin'
 
 # Deploy a single node
