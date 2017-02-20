@@ -93,6 +93,7 @@ openiosds::oioswift {'oioswift-0':
   no_exec          => true,
 }
 openiosds::memcached {'memcached-0':
-  ns => 'OPENIO',
-  no_exec => true,
+  ns        => 'OPENIO',
+  ipaddress => "${ipaddr}",
+  no_exec   => true,
 }
