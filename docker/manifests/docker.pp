@@ -87,9 +87,10 @@ openiosds::ecd {'ecd-0':
 openiosds::oioswift {'oioswift-0':
   ns               => 'OPENIO',
   ipaddress        => '0.0.0.0',
+  sds_proxy_url    => "http://${ipaddr}:6006",
   auth_system      => 'tempauth',
   tempauth_users   => [$default_tempauth_users],
-  memcache_servers => "${ipaddress}:6019",
+  memcache_servers => "${ipaddr}:6019",
   no_exec          => true,
 }
 openiosds::memcached {'memcached-0':
