@@ -9,11 +9,14 @@ class {'gridinit':
 }
 class{'openiosds':}
 openiosds::namespace {'OPENIO':
-  ns             => 'OPENIO',
-  conscience_url => "${ipaddr}:6000",
-  oioproxy_url   => "${ipaddr}:6006",
-  eventagent_url => "beanstalk://${ipaddr}:6014",
-  ecd_url        => "${ipaddr}:6017",
+  ns                => 'OPENIO',
+  conscience_url    => "${ipaddr}:6000",
+  oioproxy_url      => "${ipaddr}:6006",
+  eventagent_url    => "beanstalk://${ipaddr}:6014",
+  ecd_url           => "${ipaddr}:6017",
+  meta1_digits      => 0,
+  ns_storage_policy => 'SINGLE',
+  ns_chunk_size     => '10485760',
 }
 openiosds::account {'account-0':
   ns         => 'OPENIO',
