@@ -49,7 +49,7 @@ $SED -i -e 's@enforcing@permissive@' /etc/selinux/config
 if [ $EUID -ne 0 ]; then
   sudo -v
   if [ $? -ne 0 ]; then
-    echo "User has no privileges to run this script. Aborting."
+    echo "User has not enough privileges to run this script. Aborting."
     exit 1
   fi
   if [ -z "$SUDO_COMMAND" ]
@@ -69,6 +69,7 @@ $TOUCH -a /etc/puppet/hiera.yaml
 # predeploy
 [ -f ${PROFILE_PATH}/${PROFILE}/predeploy.sh ] && \
   . ${PROFILE_PATH}/${PROFILE}/predeploy.sh
+
 
 # Deploy services
 for manifest in $($LS ${PROFILE_PATH}/${PROFILE}/manifests/*.pp)
