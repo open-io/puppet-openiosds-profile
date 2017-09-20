@@ -74,16 +74,17 @@ $TOUCH -a /etc/puppet/hiera.yaml
 [ -f ${PROFILE_PATH}/${PROFILE}/predeploy.sh ] && \
   . ${PROFILE_PATH}/${PROFILE}/predeploy.sh
 
+# Puppet versions before 4 need more CLI options
+PUPPET_VERSION=$($PUPPET --version)
+res=$(echo -e "4\n$PUPPET_VERSION" | sort -V | head -n 1)
+if [ "$res" != '4' ]; then
+  PUPPETOPTS="$PUPPETOPTS --no-stringify_facts"
+fi
 
 # Deploy services
 for manifest in $($LS ${PROFILE_PATH}/${PROFILE}/manifests/*.pp)
 do
   echo "Deploying service $($BASENAME $manifest .pp) ..."
-  PUPPET_VERSION=$($PUPPET --version)
-  res=$(echo -e "4\n$PUPPET_VERSION" | sort -V | head -n 1)
-  if [ "$res" != '4' ]; then
-    PUPPETOPTS="$PUPPETOPTS --no-stringify_facts"
-  fi
   $PUPPET apply $PUPPETOPTS --modulepath=$MODULEPATH $manifest || \
     (echo "Error: Failed to deploy service $($BASENAME $manifest .pp)." ; exit 1)
 done
