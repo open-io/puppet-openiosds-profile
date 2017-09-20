@@ -42,8 +42,12 @@ fi
 PROFILE=$1
 
 # Disable SELinux
-$SETENFORCE 0
-$SED -i -e 's@enforcing@permissive@' /etc/selinux/config
+if [ -x $SETENFORCE ]; then
+  $SETENFORCE 0
+fi
+if [ -f /etc/selinux/config ]; then
+  $SED -i -e 's@enforcing@permissive@' /etc/selinux/config
+fi
 
 # Check if using root or sudo rights
 if [ $EUID -ne 0 ]; then
