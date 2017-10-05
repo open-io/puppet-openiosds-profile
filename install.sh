@@ -26,7 +26,6 @@ PROFILE="standalone"
 PROFILE_PATH="/usr/share/puppet/modules/openiosds/profiles"
 SETENFORCE="/sbin/setenforce"
 MODULEPATH="/usr/share/puppet/modules:/etc/puppet/modules"
-PUPPETOPTS=""
 
 
 ### Preflight checks
